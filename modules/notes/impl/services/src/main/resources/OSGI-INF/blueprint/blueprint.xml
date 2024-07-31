@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <reference id="noteRepositoryService" interface="org.opentaps.notes.repository.NoteRepository"/>
+    <reference id="validationService" interface="org.opentaps.validation.services.ValidationService"/>
+    <reference id="noteSecurityService" interface="org.opentaps.notes.security.NoteSecurity"/>
+    <reference id="NoteFactory" interface="org.opentaps.notes.domain.NoteFactory"/>
+    
+    <bean id="createNoteServiceImpl" class="org.opentaps.notes.services.impl.CreateNoteServiceImpl">
+        <property name="noteRepository" ref="noteRepositoryService"/>
+        <property name="validationService" ref="validationService"/>
+        <property name="noteSecurity" ref="noteSecurityService"/>
+        <property name="noteFactory" ref="NoteFactory"/>
+    </bean>
+    <service id="notes.createNoteService" ref="createNoteServiceImpl" interface="org.opentaps.notes.services.CreateNoteService">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="org.opentaps.notes.services.CreateNoteService"/>
+        </service-properties>
+    </service>
+
+    <bean id="getNotesServiceImpl" class="org.opentaps.notes.services.impl.GetNotesServiceImpl">
+        <property name="noteRepository" ref="noteRepositoryService"/>
+        <property name="validationService" ref="validationService"/>
+    </bean>
+    <service id="notes.getNotesService" ref="getNotesServiceImpl" interface="org.opentaps.notes.services.GetNotesService">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="org.opentaps.notes.services.GetNotesService"/>
+        </service-properties>
+    </service>
+
+    <bean id="getNoteByIdServiceImpl" class="org.opentaps.notes.services.impl.GetNoteByIdServiceImpl">
+        <property name="noteRepository" ref="noteRepositoryService"/>
+        <property name="validationService" ref="validationService"/>
+    </bean>
+    <service id="notes.getNoteByIdService" ref="getNoteByIdServiceImpl" interface="org.opentaps.notes.services.GetNoteByIdService">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="org.opentaps.notes.services.GetNoteByIdService"/>
+        </service-properties>
+    </service>
+
+</blueprint>

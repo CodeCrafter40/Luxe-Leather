@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>modules</artifactId>
+        <groupId>org.opentaps</groupId>
+        <version>2.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>entity</artifactId>
+    <packaging>bundle</packaging>
+    <name>Core Entities</name>
+
+    <build>
+    	<plugins>
+            <plugin>
+                <groupId>org.apache.openjpa</groupId>
+                <artifactId>openjpa-maven-plugin</artifactId>
+                <version>2.2.0</version>
+                <configuration>
+                    <includes>**/*.class</includes>
+                    <excludes>**/*PK.class</excludes>
+                    <addDefaultConstructor>true</addDefaultConstructor>
+                    <enforcePropertyRestrictions>true</enforcePropertyRestrictions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>enhancer</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+                        <Export-Package>org.opentaps.entity</Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+    	</plugins>
+    	<pluginManagement>
+    	    <plugins>
+    	        <plugin>
+    	            <groupId>org.eclipse.m2e</groupId>
+    	            <artifactId>lifecycle-mapping</artifactId>
+    	            <version>1.0.0</version>
+    	            <configuration>
+    	                <lifecycleMappingMetadata>
+    	                    <pluginExecutions>
+    	                        <pluginExecution>
+    	                            <pluginExecutionFilter>
+    	                                <groupId>org.apache.openjpa</groupId>
+    	                                <artifactId>openjpa-maven-plugin</artifactId>
+    	                                <versionRange>[2.2.0,)</versionRange>
+    	                                <goals>
+                                            <goal>enhance</goal>
+    	                                </goals>
+    	                            </pluginExecutionFilter>
+    	                            <action>
+    	                                <ignore></ignore>
+    	                            </action>
+    	                        </pluginExecution>
+    	                    </pluginExecutions>
+    	                </lifecycleMappingMetadata>
+    	            </configuration>
+    	        </plugin>
+    	    </plugins>
+    	</pluginManagement>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

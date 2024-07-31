@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+    xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+    default-activation="lazy">
+
+    <bean id="jpaTestImpl" class="org.opentaps.testsuit.jpa.impl.JPATestService">
+        <tx:transaction method="*" value="Required" />
+        <jpa:context property="entityManager" unitname="default" />
+    </bean>
+
+    <service ref="jpaTestImpl" interface="org.opentaps.testsuit.jpa.IJPATestService">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="JPATestService" />
+        </service-properties>
+    </service>
+
+    <bean id="xmlrpcTestImpl" class="org.opentaps.testsuit.rpc.impl.XMLRPCTests">
+    </bean>
+
+    <service ref="xmlrpcTestImpl" interface="org.opentaps.testsuit.rpc.IXMLRPCTests">
+        <service-properties>
+            <entry key="osgi.jndi.service.name" value="XMLRPCTestService"/>
+        </service-properties>
+    </service>
+
+</blueprint>

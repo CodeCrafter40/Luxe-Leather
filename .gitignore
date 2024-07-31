@@ -1,0 +1,14 @@
+target/
+*/target/
+/runner
+$*
+clients/phonegap/android/NoteApp/bin/
+
+# Eclipse stuff
+.settings/
+*/.settings/
+.project
+.classpath
+build.properties
+*/META-INF/
+*/OSGI-INF/

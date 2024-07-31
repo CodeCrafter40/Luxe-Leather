@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) Open Source Strategies, Inc.
+ *
+ * Opentaps is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published
+ * by the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Opentaps is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Opentaps.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit transaction-type="JTA" name="default">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/opentaps2-db-xa)</jta-data-source>
+        <non-jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/opentaps2-db-none)</non-jta-data-source>
+
+        <class>org.opentaps.entity.Enumeration</class>
+        <class>org.opentaps.entity.EnumerationType</class>
+        <class>org.opentaps.entity.TestEntity</class>
+        <class>org.opentaps.entity.TestEntityItem</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema"/>
+            <property name="openjpa.BrokerImpl" value="non-finalizing" /> 
+        </properties>
+    </persistence-unit>
+
+</persistence>
