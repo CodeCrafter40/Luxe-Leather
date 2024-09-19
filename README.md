@@ -14,6 +14,14 @@ LuxeLeather Inc., a leader in leather craftsmanship, faced considerable challeng
 ### Integrations and Tech Stack:
 The ERP solution was built on a robust tech stack, integrating various components to optimize LuxeLeather's operations:
 
+![Java](https://img.shields.io/badge/Java-17-blue?logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.10-brightgreen?logo=spring&logoColor=white)
+![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-6.0-green?logo=mongodb&logoColor=white)
+![Git](https://img.shields.io/badge/Git-2.41.0-fc6d26?logo=git&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-24.0.4-blue?logo=docker&logoColor=white)
+
+
 - **ERP Platform:** Custom-built to address specific needs, with modules for procurement, inventory management, sales, and finance.
 - **IoT Sensors:** Used for real-time quality monitoring and automated quality assurance.
 - **Analytics Tools:** Integrated with the ERP system to provide actionable insights and predictive analytics.
